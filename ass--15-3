@@ -1,0 +1,35 @@
+class Shared {
+    synchronized void display() {
+        try {
+            System.out.println(Thread.currentThread().getName() + " entered block");
+            Thread.sleep(2000); // sleep inside synchronized block
+            System.out.println(Thread.currentThread().getName() + " exiting block");
+        } catch (InterruptedException e) {
+            System.out.println("Thread interrupted");
+        }
+    }
+}
+
+class MyThread extends Thread {
+    Shared s;
+
+    MyThread(Shared s) {
+        this.s = s;
+    }
+
+    public void run() {
+        s.display();
+    }
+}
+
+public class SynchronizedSleep {
+    public static void main(String[] args) {
+        Shared obj = new Shared();
+
+        MyThread t1 = new MyThread(obj);
+        MyThread t2 = new MyThread(obj);
+
+        t1.start();
+        t2.start();
+    }
+}
