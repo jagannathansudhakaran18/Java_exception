@@ -1,0 +1,11 @@
+public class SleepMainThread {
+    public static void main(String[] args) {
+        try {
+            System.out.println("Main thread starts");
+            Thread.sleep(3000); 
+            System.out.println("Main thread resumes after 3 seconds");
+        } catch (InterruptedException e) {
+            System.out.println("Thread interrupted");
+        }
+    }
+}
